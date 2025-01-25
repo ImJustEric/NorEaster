@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Checklist
+{% endblock %}
+
+{% block main %}
+   <h2>Checklist</h2>
+   {% if resorts %}
+    {% for resort in resorts %}
+      {% if resort.mountain_name: %}
+        <!--Bootstrapper Accordion-->
+        <div class="accordion" id="accordionPanelsStayOpenExample">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-heading{{ resort.id }}">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse{{ resort.id }}" aria-expanded="true" aria-controls="panelsStayOpen-collapse{{ resort.id }}">
+                {{ resort.mountain_name }}
+              </button>
+            </h2>
+            <div id="panelsStayOpen-collapse{{ resort.id }}" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-heading{{ resort.id }}">
+              <div class="accordion-body">
+                <form id="checklist-form" method="POST" action="/checklist">
+                  <input type="hidden" name="checklist-id" value="{{ resort.id }}">
+                  <div class="row g-3 align-items-center">
+                    <div class="col">
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="checkbox-{{ resort.mountain_name }}" name="visited-resort" value="{{ resort.mountain_name }}">
+                        <label class="form-check-label">I skied this resort!</label>
+                        <script src="script.js"></script>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="input-group">
+                        <label class="input-group-text" for="comments">Comments:</label>
+                        <input autocomplete="off" type="text" class="form-control" id="comment-{{ resort.id }}" name="comment" placeholder="Enter your comments here" value="{{ resort.comment|default('') }}">
+                        <div id="resort-comment-{{ resort.id }}" data-resort-comment="{{ resort.comment }}"></div>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <button type="submit" class="btn btn-primary" name="checklist-submit">Save</button>
+                      <button type="submit" class="btn btn-danger" name="checklist-remove">Remove</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  {% else %}
+        <p>You have nothing in your checklist</p>
+  {% endif %}
+
+
+{% endblock %}
