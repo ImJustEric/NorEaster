@@ -1,0 +1,193 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Search
+{% endblock %}
+
+{% block main %}
+  <!--Sidebar advanced filters-->
+  <div class="content-container">
+    <div class="sidenav">
+        <h3>Advanced filters</h3>
+        <!--Location checklist-->
+        <div class="card">
+            <article class="card-group-item">
+                <header class="card-header">
+                    <h6 class="filter-title">Location (Set First)</h6>
+                </header>
+                <div class="filter-content">
+                    <div class="card-body">
+                    <form id="regionForm" method="post">
+                        <label class="form-check">
+                          <input class="form-check-input" type="checkbox" name="region" value="Maine">
+                          <span class="form-check-label">Maine</span>
+                        </label>
+                        <label class="form-check">
+                          <input class="form-check-input" type="checkbox" name="region" value="Massachusetts">
+                          <span class="form-check-label">Massachusetts</span>
+                        </label>
+                        <label class="form-check">
+                          <input class="form-check-input" type="checkbox" name="region" value="New Hampshire">
+                          <span class="form-check-label">New Hampshire</span>
+                        </label>
+                        <label class="form-check">
+                            <input class="form-check-input" type="checkbox" name="region" value="Vermont">
+                            <span class="form-check-label">Vermont</span>
+                        </label>
+                    </form>
+                    </div>
+                </div>
+                <!--Start of all input fields-->
+                <form action="/search" method="post">
+                  <header class="card-header">
+                      <h6 class="filter-title">Minimum Mountain Elevation</h6>
+                  </header>
+                  <div class="container">
+                    <div class="filter-content">
+                      <div class="card-body">
+                        <div class="row align-items-end">
+                          <div class="form-group col-md-6">
+                            <label for="minimum-min">Min</label>
+                            <input type="number" class="form-control" id="minimum-min" name="minimum-min" placeholder="0 m">
+                          </div>
+                          <div class="form-group col-md-6">
+                            <label for="minimum-max">Max</label>
+                            <input type="number" class="form-control" id="minimum-max" name="minimum-max" placeholder="1500 m">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <header class="card-header">
+                    <h6 class="filter-title">Maximum Mountain Elevation</h6>
+                  </header>
+                  <div class="container">
+                    <div class="filter-content">
+                        <div class="card-body">
+                          <div class="row align-items-end">
+                            <div class="form-group col-md-6">
+                              <label for="maximum-min">Min</label>
+                              <input type="number" class="form-control" id="maximum-min" name="maximum-min" placeholder="0 m">
+                            </div>
+                            <div class="form-group col-md-6">
+                              <label for="maximum-max">Max</label>
+                              <input type="number" class="form-control" id="maximum-max" name="maximum-max" placeholder="1500 m">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  <header class="card-header">
+                      <h6 class="filter-title">Easy Trails</h6>
+                  </header>
+                  <div class="container">
+                      <div class="filter-content">
+                        <div class="card-body">
+                          <div class="row align-items-end">
+                            <div class="form-group col-md-6">
+                              <label for="easy-min">Min</label>
+                              <input type="number" class="form-control" id="easy-min" name="easy-min" placeholder="0">
+                            </div>
+                            <div class="form-group col-md-6">
+                              <label for="easy-max">Max</label>
+                              <input type="number" class="form-control" id="easy-max" name="easy-max" placeholder="100">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  <header class="card-header">
+                      <h6 class="filter-title">Intermediate Trails</h6>
+                  </header>
+                  <div class="container">
+                      <div class="filter-content">
+                        <div class="card-body">
+                          <div class="row align-items-end">
+                            <div class="form-group col-md-6">
+                              <label for="med-min">Min</label>
+                              <input type="number" class="form-control" id="med-min" name="med-min" placeholder="0">
+                            </div>
+                            <div class="form-group col-md-6">
+                              <label for="med-max">Max</label>
+                              <input type="number" class="form-control" id="med-max" name="med-max" placeholder="100">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  <header class="card-header">
+                      <h6 class="filter-title">Advanced Trails</h6>
+                  </header>
+                  <div class="container">
+                      <div class="filter-content">
+                        <div class="card-body">
+                          <div class="row align-items-end">
+                            <div class="form-group col-md-6">
+                              <label for="adv-min">Min</label>
+                              <input type="number" class="form-control" id="adv-min" name="adv-min" placeholder="0">
+                            </div>
+                            <div class="form-group col-md-6">
+                              <label for="adv-max">Max</label>
+                              <input type="number" class="form-control" id="adv-max" name="adv-max" placeholder="100">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <header class="card-header">
+                      <div class="row">
+                        <div class="col">
+                          <div class="form-group col-md-12">
+                            <button class="btn btn-primary" id="filter-submit" type="submit">Submit Filters</button>
+                          </div>
+                        </div>
+                      </div>
+                    </header>
+                  </form>
+            </article>
+        </div>
+    </div>
+    <!--Actual searched content-->
+    <div class="search-content">
+      <div class="search-title">
+        <h3>Resort/Mountain Results</h3>
+      </div>
+      <div class="search-page-bar">
+        <form class="navbar-form navbar-left" action="/search" method="post">
+          <input autocomplete="off" type="text" class="form-control col-med-8" id="search-page-search" name="search-page-search" placeholder="Search for Resort">
+       </form>
+      </div>
+     {% for resort in resorts: %}
+        {% if resort.name %}
+          <div class="search-box">
+            <p class="search-mountain">{{resort.name}}</p>
+            <form method="post" action="/add-to-checklist">
+              <input type="hidden" name="resort-id" value="{{ resort.resort_id }}">
+              <table class="mountain-stats">
+                <tr>
+                  <td><ul><li>Location: {{resort.region}}</li></ul></td>
+                  <td><ul><li>Easy Trails: {{resort.easy_count}}</li></ul></td>
+                  <td><ul><li>Other Trails: {{resort.other_count}}</li></ul></td>
+                </tr>
+                <tr>
+                  <td><ul><li>Minimum Elevation: {{resort.min_elevation|round(2)}} m</li></ul></td>
+                  <td><ul><li>Intermediate Trails: {{resort.medium_count}}</li></ul></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td><ul><li>Maximum Elevation: {{resort.max_elevation|round(2)}} m</li></ul></td>
+                  <td><ul><li>Advanced Trails: {{resort.hard_count}}</li></ul></td>
+                  <td id="checklist-button"><button class="btn btn-primary">Add to Checklist</button></td>
+                </tr>
+              </table>
+            </form>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}
+
+
+
+
