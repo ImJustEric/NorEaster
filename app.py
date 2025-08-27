@@ -9,6 +9,11 @@ from helpers import login_required
 
 # Configure application
 app = Flask(__name__)
+# Explicitly set SESSION_COOKIE_NAME for Flask 2.3+
+app.config["SESSION_COOKIE_NAME"] = "session"
+# Backwards-compatibility: some extensions (e.g. older Flask-Session)
+# access `app.session_cookie_name` directly. Ensure it's present.
+app.session_cookie_name = app.config["SESSION_COOKIE_NAME"]
 
 # Configure session to use filesystem (instead of signed cookies)
 app.config["SESSION_PERMANENT"] = False
