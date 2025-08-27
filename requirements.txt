@@ -1,0 +1,4 @@
+Flask>=2.2,<4
+Flask-Session>=0.4
+cs50>=3.0
+Werkzeug>=2.2
