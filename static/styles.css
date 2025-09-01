@@ -36,11 +36,18 @@ nav .navbar-brand
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
     text-align: center;
     position: relative;
+    background-color: rgba(255, 255, 255, 0.85);
+    padding: 2rem 3rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    width: 60%;
+    max-width: 800px;
+    min-width: 300px; 
+    height: auto;
+    margin: 5vh auto;
 }
-
 #skiing-background {
     width: 100%;
     height: 100%;
